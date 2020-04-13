@@ -13,6 +13,8 @@ from .tokens import account_activation_token
 from django.contrib import messages
 from django.contrib.auth import login
 
+from .models import *
+
 # Create your views here.
 
 
@@ -73,7 +75,23 @@ class ActivateAccount(View):
 def landing(request):
     return render(request, 'landing.html')
 
+def ourstory(request):
+    return render(request, 'ourstory.html')
 
+def ourpatners(request):
+    return render(request, 'ourpatners.html')
+
+def news(request):
+    return render(request, 'news.html')
+
+def news1(request):
+    return render(request, 'news1.html')
+
+def news2(request):
+    return render(request, 'news2.html')
+
+def contactus(request):
+    return render(request, 'contactus.html')
 
 @login_required
 def home(request):
@@ -82,4 +100,30 @@ def home(request):
 
 @login_required
 def recipes(request):
-    return render(request, 'myrecipes.html')
+    recipe = Recipe.objects.filter(user=request.user)
+    return render(request, 'myrecipes.html',{'recipes':recipe})
+
+@login_required
+def viewrecipes(request,id):
+    recipe = Recipe.objects.get(id=id)
+    ingredients = recipe.ingredients.split(',')
+    return render(request, 'viewrecipes.html',{'recipe':recipe,'ingredients':ingredients})
+
+
+@login_required
+def addrecipes(request):
+    if request.method == "POST":
+        print (request.POST)
+        print (request.POST['addmore'])
+
+        r = Recipe()
+        r.title = request.POST['title']
+        r.description = request.POST['desc']
+        r.cusine = request.POST['cusine']
+        r.ingredients = request.POST['addmore']
+        r.user = request.user
+        r.save()
+
+        return redirect('myrecipes')
+    else:
+        return render(request, 'addrecipes.html')

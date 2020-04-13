@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+  <div class="row">
+    <h2 class="text-center">Recipes</h2>
+  </div>
+  <hr>
+
+  <div class="row">
+    <h2 class="text-center">{{recipe.title}}</h2>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">INGREDIENTS</div>
+        <div class="panel-body">
+          <ol>
+            {% for i in ingredients %}
+              <li>{{i}}</li>
+            {% endfor %}
+        </ol>
+        </div>
+    </div>
+    </div>
+    <div class="col-md-8">
+
+     <div class="panel panel-info">
+        <div class="panel-heading">INSTRUCTIONS</div>
+        <div class="panel-body">{{recipe.description|linebreaks}}</div>
+     </div>
+
+    </div>
+
+   </div>
+
+
+
+{% endblock %}
