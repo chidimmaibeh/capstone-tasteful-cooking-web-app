@@ -6,11 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Chidimma">
 
-  <title>Tasteful Cooking App</title>
+  <title>Tasteful Cooking</title>
   {% load static %}
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+
+
 
 
 </head>
@@ -18,13 +25,13 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">GroceryApp</a>
+        <a class="navbar-brand" href="/">Tasteful Cooking</a>
       </div>
       <ul class="nav navbar-nav">
         <li><a href="{% url 'home' %}">Home</a></li>
         <li><a href="{% url 'myrecipes' %}">MyRecipes</a></li>
-        <li><a href="#">GroceryList</a></li>
-        <li><a href="#">MyPlanner</a></li>
+        <li><a href="{% url 'mygrocery' %}">GroceryList</a></li>
+        <li><a href="{% url 'planner' %}">MyPlanner</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}

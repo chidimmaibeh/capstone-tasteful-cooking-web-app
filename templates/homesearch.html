@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+  <div class="row">
+    <h2 class="text-center">Cooking Made Easy</h2>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="list-group" style="text-align:center">
+      <a href="#" class="list-group-item disabled">Results</a>
+      {% if recipes %}
+        {% for recipe in recipes %}
+          <a href="/recipes/view/{{recipe.id}}/" class="list-group-item">{{recipe.title}}</a>
+        {% endfor %}
+      {% else %}
+        <p>Sorry, no recipe in this list.</p>
+      {% endif %}
+   </div>
+</div><!-- /.row -->
+
+
+
+{% endblock %}

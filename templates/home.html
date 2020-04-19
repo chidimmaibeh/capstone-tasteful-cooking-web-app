@@ -7,14 +7,17 @@
   </div>
   <hr>
   <div class="row">
+    <form class="form-horizontal"  action="{% url 'homesearch' %}">
     <div class="col-lg-4 col-lg-offset-4">
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="search recipes" />
+            <input type="text" class="form-control" name="search" placeholder="search recipes" required/>
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button">Go!</button>
+                <button class="btn btn-info" type="submit">Go!</button>
             </span>
         </div><!-- /input-group -->
     </div><!-- /.col-lg-4 -->
+  </form>
+
 </div><!-- /.row -->
 
 

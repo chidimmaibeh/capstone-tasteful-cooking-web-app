@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+  <div class="row">
+    <h2 class="text-center">MyPlanner</h2>
+  </div>
+  <hr>
+
+  <div class="row">
+
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {% if not recipes %}
+            Let's get started and add new Plans
+          {% endif %}
+          <a href={% url 'addplanner' %} class="btn btn-primary btn-sm pull-right">Add New</a>
+        </div>
+
+
+  </div>
+  </div>
+  {% if planners %}
+  <div class="row">
+    {% for planner in planners %}
+    <div class="col-lg-4">
+      <div class="panel panel-info">
+        <div class="panel-heading">Meal Entry:<b>{{planner.date}}</b></div>
+        <div class="panel-body">{{planner.recipe.title}}</div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+
+{% endblock %}

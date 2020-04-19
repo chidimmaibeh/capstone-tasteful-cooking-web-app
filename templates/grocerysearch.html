@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+  <div class="row">
+    <h2 class="text-center">MyGrocery</h2>
+  </div>
+  <hr>
+
+  <div class="row">
+    {% if recipes %}
+      <div class="col-lg-6 col-lg-offset-3">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Recipe</th>
+              <th>User</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for recipe in recipes %}
+            <tr>
+              <td>{{recipe.title}}</td>
+              <td>{{recipe.user}}</td>
+              <td>
+                <button type="submit" class="btn btn-info"><a href="/grocery/add/{{recipe.id}}/">Add to list</a></button>
+              </td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="col-lg-4 col-lg-offset-4">
+        <p>Sorry, no recipe in this list.</p>
+      </div>
+    {% endif %}
+
+  </div>
+  {% if grocerys %}
+    <div class="list-group" style="text-align:center">
+      <a href="#" class="list-group-item disabled">Grocery</a>
+      {% for grocery in grocerys %}
+        <a href="/recipes/view/{{grocery.recipe.id}}/" class="list-group-item">{{grocery.recipe.title}}</a>
+      {% endfor %}
+   </div>
+  {% endif %}
+
+
+
+{% endblock %}
