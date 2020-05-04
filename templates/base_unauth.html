@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Chidimma">
+
+  <title>Tasteful Cooking</title>
+  {% load static %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+  <link rel="stylesheet" type="text/css" href="{% static "styles/main.css" %}">
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+</head>
+<body>
+  <div class="site">
+    <header class="site-header">
+      <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#"><img src="{% static "images/logo.png" %}" ></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+              <div class="g_one"></div>
+              <div class="g_two"></div>
+              <div class="g_three"></div>
+            </button>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+            <li><a class="nav-link" href="{% url 'myrecipes' %}">MyRecipes</a></li>
+            <li><a class="nav-link" href="{% url 'mygrocery' %}">GroceryList</a></li>
+            <li><a class="nav-link" href="{% url 'planner' %}">MyPlanner</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+            <li><a class="nav-link" href="#">Hello,{{request.user.first_name}}</a></li>
+            <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Sign-out</a></li>
+            {% else %}
+              <li><a class="nav-link" href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Join Free</a></li>
+              <li><a class="nav-link" href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Sign-in</a></li>
+          {% endif %}
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="site-content">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="n_content">
+              {% block content %}
+              {% endblock %}
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="footer_top">
+      <div class="s_image_wrapper">
+        <img src="{% static "images/logo.png" %}" class="img-rounded" style="width:100%">
+      </div>
+
+      <div class="footer_right">
+        <div class="panel panel-default">
+          <div class="panel-heading">About Us</div>
+          <div class="panel-body"><a href="{% url 'ourstory' %}">Our Story</a></div>
+          <div class="panel-body"><a href="{% url 'ourpatners' %}">Our Patners</a></div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Resource</div>
+          <div class="panel-body"><a href="{% url 'news' %}">News</a></div>
+          <div class="panel-body"><a href="{% url 'contactus' %}">Contact Us</a></div>
+        </div>
+      </div>
+    </div>
+        <div class="copyright">&copy; 2020 Tasteful Cooking</div>
+    </footer>
+  </div>
+  <script>
+
+function damaxToggleMenu() {
+
+    jQuery(".navbar-toggler").click(function() {
+        jQuery('body').toggleClass("menu_expanded");
+    });
+}
+damaxToggleMenu();
+    </script>
+ </body>
+
+</html>

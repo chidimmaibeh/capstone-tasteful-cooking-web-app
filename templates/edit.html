@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% block content %}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" >
+<style>
+  .d-inline-block{
+    display: inline-block;
+  }
+  .w-90{
+    width: 90%;
+  }
+  .mr-2{
+    margin-right: 5px;;
+  }
+  .opacity-0 {
+    opacity: 0;
+  }
+  .opacity-1{
+    opacity:1;
+  }
+  .d-none{
+    display: none;
+  }
+</style>
+{% load static %}
+
+  <div class="row">
+    <h2 class="text-center">MyRecipes</h2>
+  </div>
+  <hr>
+
+  <div class="row">
+
+      <div class="panel panel-default">
+        <div class="panel-heading text-center">Add Recipes</div>
+        <div class="panel-body">
+          <form class="form-horizontal" method="post" action=".">
+            {% csrf_token %}
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="title">Title:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="title" name="title" value="{{title}}" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="desc">Description:</label>
+              <div class="col-sm-10">
+                <textarea class="form-control" rows="5" id="desc" name="desc" required></textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="Cusine">Cusine:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="Cusine" name="cusine" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="Cusine">Ingredients:</label>
+              <div class="col-sm-10">
+    							<input type="text" name="addmore" id="ingredients" class="form-control" placeholder="Add multiple with ," required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="Cusine">Grocery List:</label>
+
+              {{ formset.management_form }}
+              <div class="col-sm-10" >
+                <div style="width: 100%; height: 30px;">
+                  <span class="pink-color" onclick="addForm()" style="margin-top: 15px;">
+                    <strong class="ml-2">
+                        <i class="fas fa-plus-circle"></i>
+                    </strong>
+                  </span>
+                </div>
+                <div id="main-content">
+                {% for form in formset %}
+
+                <div id="{{forloop.counter0}}-row-form">
+                  {% if  forloop.counter == 1 %}
+                  {{ form.content | add_class:"form-control formset-control w-90 mr-2" | attr:"required" }}
+                  {{ form.user | add_class:"fixed-user d-none"}}
+                  {{ form.id }}
+                {% else %}
+                  {{ form.content | add_class:"form-control formset-control d-inline-block w-90 mr-2" | attr:"required" }}
+
+                  <span class="pink-color" onclick="remove({{forloop.counter0}})" style="display: inline-block;">
+                    <strong class="ml-2">
+                        <i class="fas fa-minus-circle"></i>
+                    </strong>
+                  </span>
+                  {{ form.user | add_class:"fixed-user d-none"}}
+                  {{ form.id }}
+                {% endif %}
+                </div>
+
+                {% endfor %}
+              </div>
+
+              </div>
+
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </div>
+          </form>
+          <div id="empty_form" class="opacity-0" style="display: none;">
+            <div id="__prefix__-row-form">
+              {{formset.empty_form.content |add_class:"form-control formset-control d-inline-block w-90 mr-2" | attr:"required" }}
+              {{ formset.empty_form.user | add_class:"fixed-user d-none"}}
+              {{ formset.empty_form.id }}
+
+              <span class="pink-color" onclick="remove(__prefix__)" style="display: inline-block;">
+                <strong class="ml-2">
+                    <i class="fas fa-minus-circle"></i>
+                </strong>
+              </span>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+  </div>
+<script>
+  function remove(id){
+    var form_idx = $('#id_grocery_set-TOTAL_FORMS').val();
+    form_idx = parseInt(form_idx) - 1;
+    for (var i = id; i <= form_idx-1; i++) {
+      next_val = $(`#id_grocery_set-${i+1}-content`).val();
+      $(`#id_grocery_set-${i}-content`).val(next_val);
+    }
+    $(`#${form_idx}-row-form`).remove();
+    $('#id_grocery_set-TOTAL_FORMS').val(form_idx);
+  }
+
+  function addForm()
+  {
+
+    var form_idx = $('#id_grocery_set-TOTAL_FORMS').val();
+    var mainContent = $('#main-content');
+    mainContent.append($('#empty_form').html().replace(/__prefix__/g, form_idx));
+	  $('#id_grocery_set-TOTAL_FORMS').val(parseInt(form_idx) + 1);
+    $('.fixed-user').val({{userId}});
+  }
+  $( document ).ready(function() {
+    $('.fixed-user').val({{userId}});
+});
+</script>
+
+
+{% endblock %}

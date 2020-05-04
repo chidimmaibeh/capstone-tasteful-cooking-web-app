@@ -11,21 +11,23 @@
 
       <div class="panel panel-default">
         <div class="panel-body">
+         {# check recipe not exist then  do this #}
           {% if not recipes %}
             Let's get started and add new recipes
           {% endif %}
           <a href="{% url 'addrecipes' %}" class="btn btn-primary btn-sm pull-right">Add New</a>
-        </div
+        </div>
     </div>
 
   </div>
+ {# check recipes #}
   {% if recipes %}
     <div class="list-group" style="text-align:center">
       <a href="#" class="list-group-item disabled">recipes</a>
       {% for recipe in recipes %}
         <a href="view/{{recipe.id}}/" class="list-group-item">{{recipe.title}}</a>
       {% endfor %}
-   </div>
+   </div> <!-- end of list-group -->
   {% endif %}
 
 

@@ -14,11 +14,15 @@
   <link rel="stylesheet" type="text/css" href="{% static "styles/main.css" %}">
   <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
 
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+   {% block extrahead %}{% endblock %}
+   {% block extrastyles %}{% endblock %}
 </head>
+
+
 <body>
   <div class="site">
     <header class="site-header">
@@ -40,6 +44,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
+            <li><a class="nav-link" href="#">Hello,{{request.user.first_name}}</a></li>
             <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Sign-out</a></li>
             {% else %}
               <li><a class="nav-link" href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Join Free</a></li>
@@ -52,12 +57,10 @@
     <div class="site-content">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <div class="n_content">
+          <div class="col-md-12"style="min-height: 62vh">
               {% block content %}
               {% endblock %}
               <hr>
-            </div>
           </div>
         </div>
       </div>

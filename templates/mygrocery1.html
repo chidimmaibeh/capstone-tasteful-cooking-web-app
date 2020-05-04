@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% load static %}
+  <div class="row">
+    <h2 class="text-center">MyGrocery</h2>
+  </div> <!-- row -->
+  <hr>
+ {# checking recipes #}
+  {% if recipes %}
+    <div class="list-group" style="text-align:center">
+      <a href="#" class="list-group-item disabled">recipes</a>
+      <form method="post" action="/grocery/list/" style="text-align: left; margin-left:48%;">
+        {% csrf_token %}
+     {# looping through the recipes #}
+        {% for recipe in recipes %}
+            <div class="checkbox">
+            <label><input type="checkbox" name="recipeIds" value="{{recipe.id}}"> {{recipe.title }}</label>
+          </div>
+        {% endfor %}
+        <button class="btn btn-info" type="submit">Next</button>
+      </form>
+   </div> <!-- list-group -->
+  {% endif %}
+
+
+
+{% endblock %}

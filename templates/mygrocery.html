@@ -8,6 +8,8 @@
   <hr>
 
   <div class="row">
+
+    {# form field for searching  #}
     <form class="form-horizontal"  action="{% url 'grocerysearch' %}">
     <div class="col-lg-4">
         <div class="input-group">
@@ -16,20 +18,60 @@
                 <button class="btn btn-info" type="submit">Search</button>
             </span>
         </div><!-- /input-group -->
-    </div>
+    </div> <!-- col-lg-4  -->
   </form>
 
   </div>
   <hr>
+
+{# check the grocery  #}
   {% if grocerys %}
-    <div class="list-group" style="text-align:center">
-      <a href="#" class="list-group-item disabled">Grocery</a>
-      {% for grocery in grocerys %}
-        <a href="/grocery/view/{{grocery.recipe.id}}/" class="list-group-item">{{grocery.recipe.title}}</a>
-      {% endfor %}
-   </div>
+ <div class="col-lg-6 col-lg-offset-3">
+   <table class="table">
+     <thead>
+       <tr>
+         <th>#</th>
+         <th>Items</th>
+         <th>Actions</th>
+       </tr>
+     </thead>
+     <tbody>
+     {% looping through the grocery %}
+       {% for grocery in grocerys %}
+       <tr>
+         <td></td>
+         <td>{{grocery.content}}</td>
+         <td>
+           <button type="submit" class="btn btn-danger"><a href="/grocery/del/{{grocery.id}}">delete</a></button>
+         </td>
+       </tr>
+       {% endfor %}
+
+     </tbody>
+   </table> <!-- table -->
+ </div> <!-- col-lg-6 -->
+
+<!-- inline style -->
+ <style>
+ table
+    {
+    counter-reset: rowNumber;
+    }
+
+    table tr > td:first-child
+    {
+    counter-increment: rowNumber;
+    }
+
+    table tr td:first-child::before
+    {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+    }
+ </style>
   {% endif %}
 
-
+<!-- content endblock -->
 
 {% endblock %}

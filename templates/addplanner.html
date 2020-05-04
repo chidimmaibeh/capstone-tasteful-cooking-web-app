@@ -9,16 +9,18 @@
   <hr>
 
   <div class="row">
-
+      <!-- Panel div -->
       <div class="panel panel-default">
         <div class="panel-heading text-center">Add Planner</div>
         <div class="panel-body">
+         {# add planer form #}
           <form class="" method="post" action="{% url 'addplanner' %}">
             {% csrf_token %}
             <div class="row">
             <div class="col-lg-4">
               <div class="form-group">
-                <div class="input-group date" data-provide="datepicker">
+                {# add date picker format #}
+                <div class="input-group date" data-provide="datepicker"> 
                   <input type="text" class="form-control" name="date" placeholder="Click">
                   <div class="input-group-addon">
                       <span class="glyphicon glyphicon-th"></span>
@@ -27,9 +29,11 @@
              </div>
          </div>
            <div class="col-lg-8">
+              {# checking recipe exist or not #}
              {% if recipes %}
                <div class="list-group">
                  <a href="#" class="list-group-item disabled">Select 1 recipe</a>
+                 {# looping through recipes  #}
                  {% for recipe in recipes %}
                  <div class="checkbox">
                     <label><input type="checkbox" name="recipe" value="{{recipe.id}}">{{recipe.title}}</label>
@@ -48,10 +52,10 @@
             </div>
           </form>
 
-        </div>
-    </div>
+        </div> <!-- panel body -->
+    </div> <!-- panel default -->
 
-  </div>
+  </div> <!-- row -->
 
 
 

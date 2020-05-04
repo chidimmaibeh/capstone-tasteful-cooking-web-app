@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+
+{# loading the static files #}
+{% load static %}
+  <div class="row">
+    <h2 class="text-center">MyGroceryList</h2>
+  </div>
+  <hr>
+{# check Grocery list exists or not  #}
+  {% if grocerys %}
+ <div class="col-lg-6 col-lg-offset-3">
+   <table class="table">
+     <thead>
+       <tr>
+         <th>#</th>
+         <th>Items</th>
+         
+       </tr>
+     </thead>
+     <tbody>
+      {# looping through the grocerys items  #}
+
+       {% for grocery in grocerys %}
+       <tr>
+         <td></td>
+         <td>{{grocery.content}}</td>
+         
+       </tr>
+       {% endfor %}
+
+     </tbody>
+   </table>
+
+ </div>
+
+<!-- inline style -->
+ <style>
+ table
+    {
+    counter-reset: rowNumber;
+    }
+
+    table tr > td:first-child
+    {
+    counter-increment: rowNumber;
+    }
+
+    table tr td:first-child::before
+    {
+    content: counter(rowNumber);
+    min-width: 1em;
+    margin-right: 0.5em;
+    }
+ </style>
+{# end if of the grocery  #}
+  {% endif %}
+
+
+<!-- content  endblock  -->
+{% endblock %}

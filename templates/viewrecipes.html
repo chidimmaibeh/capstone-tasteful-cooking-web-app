@@ -9,6 +9,8 @@
 
   <div class="row">
     <h2 class="text-center">{{recipe.title}}</h2>
+    {# url for edit and delete recipe  #}
+    <!-- <a href="/recipes/edit/{{recipe.id}}/" class="btn btn-warning btn-sm">Edit</a> -->
     <a href="/recipes/del/{{recipe.id}}/" class="btn btn-danger btn-sm pull-right">Delete</a>
   </div>
   <hr>
@@ -19,13 +21,15 @@
         <div class="panel-heading">INGREDIENTS</div>
         <div class="panel-body">
           <ol>
-            {% for i in ingredients %}
-              <li>{{i}}</li>
+            {# looping through the ingredients  #}
+
+            {% for item in ingredients %}
+              <li>{{item.content}}</li>
             {% endfor %}
         </ol>
-        </div>
+        </div> <!-- panel-body -->
     </div>
-    </div>
+    </div> <!-- col-md-4 -->
     <div class="col-md-8">
 
      <div class="panel panel-info">
@@ -33,10 +37,10 @@
         <div class="panel-body">{{recipe.description|linebreaks}}</div>
      </div>
 
-    </div>
+    </div> <!-- col-md-8 -->
 
-   </div>
+   </div> <!-- row -->
 
 
-
+<!-- content endblock -->
 {% endblock %}

@@ -1,17 +1,21 @@
-{% extends "base.html" %}
+{% extends "base_unauth.html" %}
 {% block content %}
 
 {% load static %}
+
+<h2> {{ note }} </h2>
+
   <div class="row">
+
     <h2 class="text-center">Home</h2>
     <div class="row"></div>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-    when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-  </div>
+    <p>
+      Cooking made easier with a reccipe organizer, grocery list, and meal planner.</p>
+  </div> <!-- row -->
   <hr>
   <div class="row">
     <div class="col-md-4">
-      <img src="{% static "images/authentic_ramen.jpg" %}" class="img-rounded" style="width:100%">
+      <img src="{% static 'images/authentic_ramen.jpg' %}" class="img-rounded" style="width:100%">
     </div>
     <div class="col-md-4">
       <img src="{% static "images/bacon_and_mushrooms.jpg" %}" class="img-rounded" style="width:100%">
@@ -19,6 +23,6 @@
     <div class="col-md-4">
       <img src="{% static "images/bacon_rolls.jpg" %}" class="img-rounded" style="width:100%">
     </div>
-  </div>
+  </div> <!-- row -->
 
 {% endblock %}
