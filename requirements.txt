@@ -2,7 +2,7 @@ appdirs==1.4.3
 arrow==0.15.5
 certifi==2019.11.28
 cffi==1.14.0
-cryptography==2.8
+cryptography==3.2
 distlib==0.3.0
 Django==2.2.3
 django-widget-tweaks==1.4.8
